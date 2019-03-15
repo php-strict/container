@@ -1,0 +1,27 @@
+{
+    "name": "php-strict/container",
+    "type": "library",
+    "description": "Interface and implementation of common container.",
+    "keywords": ["php","strict","container"],
+    "homepage": "https://github.com/php-strict/container",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Enikeishik",
+            "email": "enikeishik@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.1"
+    },
+    "require-dev": {
+        "codeception/codeception": "^2.5.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "PhpStrict\\Container\\": "src/",
+            "PhpStrict\\Container\\Examples\\": "examples/"
+        }
+    }
+}
