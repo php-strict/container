@@ -17,11 +17,11 @@ class Container implements ContainerInterface
     /**
      * Initialization of container.
      * 
-     * @param array $vars = null
+     * @param array $items = null
      */
     public function __construct(array $items = [])
     {
-        foreach ($vars as $key => $val) {
+        foreach ($items as $key => $val) {
             $this->$key = $val;
         }
     }
