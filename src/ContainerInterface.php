@@ -53,6 +53,7 @@ interface ContainerInterface
     
     /**
      * Gets reference to container entry.
+     * Usage: $obj =& $container->getRef('key');
      * 
      * @param string $key
      * @return mixed
