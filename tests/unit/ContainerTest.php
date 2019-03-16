@@ -1,9 +1,31 @@
 <?php
 use \PhpStrict\Container\Container;
 use \PhpStrict\Container\ContainerInterface;
+use \PhpStrict\Container\ContainerException;
+use \PhpStrict\Container\NotFoundException;
 
 class ContainerTest extends \Codeception\Test\Unit
 {
+    /**
+     * @param string $expectedExceptionClass
+     * @param callable $call = null
+     */
+    protected function expectedException(string $expectedExceptionClass, callable $call = null)
+    {
+        try {
+            $call();
+        } catch (\Exception $e) {
+            $this->assertEquals($expectedExceptionClass, get_class($e));
+            return;
+        }
+        if ('' != $expectedExceptionClass) {
+            $this->fail('Expected exception not throwed');
+        }
+    }
+    
+    /**
+     * @return array
+     */
     protected function getDataArray(): array
     {
         return [
@@ -46,5 +68,23 @@ class ContainerTest extends \Codeception\Test\Unit
         foreach ($data as $key => $val) {
             $this->assertTrue($container->has($key));
         }
+    }
+    
+    public function testGet()
+    {
+        $data = $this->getDataArray();
+        $container = new Container($data);
+        $container->obj = $data['obj'];
+        
+        foreach ($data as $key => $val) {
+            $this->assertEquals($val, $container->get($key));
+        }
+        
+        $this->expectedException(
+            NotFoundException::class, 
+            function() use ($container) {
+                $container->get('unexistence');
+            }
+        );
     }
 }
