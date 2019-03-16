@@ -38,6 +38,13 @@ class ContainerTest extends \Codeception\Test\Unit
         ];
     }
     
+    protected function getFilledContainer(array $data): Container
+    {
+        $container = new Container($data);
+        $container->obj = $data['obj'];
+        return $container;
+    }
+    
     protected function testFields(ContainerInterface $container, array $data)
     {
         $this->assertInstanceOf(Container::class, $container);
@@ -54,16 +61,13 @@ class ContainerTest extends \Codeception\Test\Unit
     public function testContainer()
     {
         $data = $this->getDataArray();
-        $container = new Container($data);
-        $container->obj = $data['obj'];
-        $this->testFields($container, $data);
+        $this->testFields($this->getFilledContainer($data), $data);
     }
     
     public function testHas()
     {
         $data = $this->getDataArray();
-        $container = new Container($data);
-        $container->obj = $data['obj'];
+        $container = $this->getFilledContainer($data);
         
         foreach ($data as $key => $val) {
             $this->assertTrue($container->has($key));
@@ -73,8 +77,7 @@ class ContainerTest extends \Codeception\Test\Unit
     public function testGet()
     {
         $data = $this->getDataArray();
-        $container = new Container($data);
-        $container->obj = $data['obj'];
+        $container = $this->getFilledContainer($data);
         
         foreach ($data as $key => $val) {
             $this->assertEquals($val, $container->get($key));
@@ -83,7 +86,7 @@ class ContainerTest extends \Codeception\Test\Unit
         $this->expectedException(
             NotFoundException::class, 
             function() use ($container) {
-                $container->get('unexistence');
+                $container->get('nonexistence');
             }
         );
     }
