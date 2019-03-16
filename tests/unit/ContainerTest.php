@@ -90,4 +90,15 @@ class ContainerTest extends \Codeception\Test\Unit
             }
         );
     }
+    
+    public function testSet()
+    {
+        $data = $this->getDataArray();
+        $container = $this->getFilledContainer($data);
+        
+        foreach ($data as $key => $val) {
+            $container->set($key, $val);
+            $this->assertEquals($val, $container->$key);
+        }
+    }
 }
