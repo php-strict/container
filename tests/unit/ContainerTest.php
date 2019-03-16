@@ -101,4 +101,19 @@ class ContainerTest extends \Codeception\Test\Unit
             $this->assertEquals($val, $container->$key);
         }
     }
+    
+    public function testGetRef()
+    {
+        $container = new Container();
+        $obj1 = new stdClass();
+        $container->ref =& $obj1;
+        
+        $obj2 =& $container->getRef('ref');
+        $obj2 = new stdClass();
+        $this->assertSame($obj1, $obj2);
+        
+        $obj3 = $container->getRef('ref');
+        $obj3 = new stdClass();
+        $this->assertNotSame($obj1, $obj3);
+    }
 }
