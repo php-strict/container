@@ -36,4 +36,15 @@ class ContainerTest extends \Codeception\Test\Unit
         $container->obj = $data['obj'];
         $this->testFields($container, $data);
     }
+    
+    public function testHas()
+    {
+        $data = $this->getDataArray();
+        $container = new Container($data);
+        $container->obj = $data['obj'];
+        
+        foreach ($data as $key => $val) {
+            $this->assertTrue($container->has($key));
+        }
+    }
 }
