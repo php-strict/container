@@ -131,4 +131,20 @@ class ContainerTest extends \Codeception\Test\Unit
         $obj3 = new stdClass();
         $this->assertNotSame($obj1, $obj3);
     }
+    
+    public function testGetAll()
+    {
+        $data = $this->getDataArray();
+        $container = $this->getFilledContainer($data);
+        
+        $containedData = $container->getAll();
+        foreach ($containedData as $ckey => $cval) {
+            foreach ($data as $key => $val) {
+                if ($key == $ckey) {
+                    $this->assertEquals($val, $cval);
+                    break;
+                }
+            }
+        }
+    }
 }
