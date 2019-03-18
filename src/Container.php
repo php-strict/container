@@ -100,4 +100,14 @@ class Container implements ContainerInterface
     {
         return get_object_vars($this);
     }
+    
+    /**
+     * Passing all container entries into unpacker as associated array.
+     * 
+     * @param callable $unpacker
+     */
+    public function unpackWith(callable $unpacker): void
+    {
+        $unpacker($this->getAll());
+    }
 }
