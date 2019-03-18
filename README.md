@@ -1,6 +1,7 @@
 # Container
 
 [![Software License][ico-license]](LICENSE.txt)
+[![Build Status][ico-travis]][link-travis]
 
 Interface and implementation of common container.
 
@@ -35,3 +36,5 @@ vendor\bin\codecept run
 ```
 
 [ico-license]: https://img.shields.io/badge/license-GPL-brightgreen.svg?style=flat-square
+[ico-travis]: https://img.shields.io/travis/php-strict/container/master.svg?style=flat-square
+[link-travis]: https://travis-ci.org/php-strict/container
