@@ -147,4 +147,20 @@ class ContainerTest extends \Codeception\Test\Unit
             }
         }
     }
+    
+    public function testUnpackWith()
+    {
+        $data = $this->getDataArray();
+        $container = $this->getFilledContainer($data);
+        
+        $unpackedData = [];
+        $unpacker = function(array $entries) use (&$unpackedData) {
+            foreach ($entries as $key => $value) {
+                $unpackedData[$key] = $value;
+            }
+        };
+        
+        $container->unpackWith($unpacker);
+        $this->assertEquals($data, $unpackedData);
+    }
 }
