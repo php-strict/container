@@ -3,6 +3,7 @@
 [![Software License][ico-license]](LICENSE.txt)
 [![Build Status][ico-travis]][link-travis]
 [![codecov][ico-codecov]][link-codecov]
+[![Codacy Badge][ico-codacy]][link-codacy]
 
 Interface and implementation of common container.
 
@@ -41,3 +42,5 @@ vendor\bin\codecept run
 [link-travis]: https://travis-ci.org/php-strict/container
 [ico-codecov]: https://codecov.io/gh/php-strict/container/branch/master/graph/badge.svg
 [link-codecov]: https://codecov.io/gh/php-strict/container
+[ico-codacy]: https://api.codacy.com/project/badge/Grade/05da7e110e55465bae0d54da68c4f2d1
+[link-codacy]: https://www.codacy.com/app/php-strict/container?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=php-strict/container&amp;utm_campaign=Badge_Grade
