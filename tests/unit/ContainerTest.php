@@ -4,6 +4,16 @@ use \PhpStrict\Container\ContainerInterface;
 use \PhpStrict\Container\ContainerException;
 use \PhpStrict\Container\NotFoundException;
 
+class ClassWithUnpacker
+{
+    public function unpacker(array $entries): void
+    {
+        foreach ($entries as $key => $value) {
+            $this->$key = $value;
+        }
+    }
+}
+
 class ContainerTest extends \Codeception\Test\Unit
 {
     /**
@@ -148,7 +158,7 @@ class ContainerTest extends \Codeception\Test\Unit
         }
     }
     
-    public function testUnpackWith()
+    public function testUnpackWithFunction()
     {
         $data = $this->getDataArray();
         $container = $this->getFilledContainer($data);
@@ -162,5 +172,16 @@ class ContainerTest extends \Codeception\Test\Unit
         
         $container->unpackWith($unpacker);
         $this->assertEquals($data, $unpackedData);
+    }
+    
+    public function testUnpackWithClass()
+    {
+        $data = $this->getDataArray();
+        $container = $this->getFilledContainer($data);
+        
+        $objWithUnpacker = new ClassWithUnpacker();
+        
+        $container->unpackWith([$objWithUnpacker, 'unpacker']);
+        $this->assertEquals($data, get_object_vars($objWithUnpacker));
     }
 }
