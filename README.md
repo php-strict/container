@@ -25,9 +25,78 @@ composer require php-strict/container
 
 ## Usage
 
-```php
+Classic usage:
 
+```php
+use PhpStrict\Container\Container
+
+$container = new Container();
+$container->set('key1', 1);
+
+if ($container->has('key1')) {
+    $var1 = $container->get('key1');
+}
 ```
+
+Usage to set/get references:
+
+```php
+use PhpStrict\Container\Container
+
+$myObject = new stdClass();
+
+$container = new Container();
+$container->setByRef('key2', $myObject);
+
+$anotherObject =& $container->getRef('key2');
+```
+
+Set container values through constructor:
+
+```php
+use PhpStrict\Container\Container
+
+$container = new Container([
+    'key1' => 1,
+    'key2' => 'value 2',
+    'key3' => true,
+]);
+
+if ($container->has('key2')) {
+    $var2 = $container->get('key2');
+}
+```
+
+Unpacking container through callback:
+
+```php
+use PhpStrict\Container\Container
+
+class MyClass
+{
+    protected $field1;
+    protected $field2;
+    protected $field3;
+    
+    public function unpacker(array $entries): void
+    {
+        foreach ($entries as $key => $value) {
+            $this->$key = $value;
+        }
+    }
+}
+
+$container = new Container([
+    'field1' => 1,
+    'field2' => 'value 2',
+    'field3' => true,
+]);
+
+$myClassObject = new MyClass();
+
+$container->unpackWith([$myClassObject, 'unpacker']);
+```
+
 
 ## Tests
 
