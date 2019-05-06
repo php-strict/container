@@ -97,7 +97,6 @@ $myClassObject = new MyClass();
 $container->unpackWith([$myClassObject, 'unpacker']);
 ```
 
-
 ## Tests
 
 To execute the test suite, you'll need [Codeception](https://codeception.com/).
